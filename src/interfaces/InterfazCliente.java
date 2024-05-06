@@ -37,6 +37,7 @@ public class InterfazCliente extends javax.swing.JFrame {
     private void initComponents() {
 
         jToggleButton1 = new javax.swing.JToggleButton();
+        BK = new javax.swing.JPanel();
         BtnDisconnect = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         ClientTitle = new javax.swing.JLabel();
@@ -56,27 +57,37 @@ public class InterfazCliente extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        BK.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
         BtnDisconnect.setText("Desconectar");
         BtnDisconnect.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnDisconnectActionPerformed(evt);
             }
         });
+        BK.add(BtnDisconnect, new org.netbeans.lib.awtextra.AbsoluteConstraints(264, 112, -1, -1));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel4.setText("Datos recibidos");
+        BK.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(36, 153, -1, -1));
 
         ClientTitle.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         ClientTitle.setText("Aplicación Cliente");
+        BK.add(ClientTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(135, 24, -1, -1));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel1.setText("TCP/IP");
+        BK.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(36, 71, -1, -1));
+        BK.add(TextTCPIP, new org.netbeans.lib.awtextra.AbsoluteConstraints(103, 71, 113, -1));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel2.setText("Puerto");
+        BK.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(36, 112, -1, -1));
+        BK.add(TextPort, new org.netbeans.lib.awtextra.AbsoluteConstraints(103, 112, 113, -1));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel3.setText("Datos a enviar al servidor");
+        BK.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(36, 314, -1, -1));
 
         BtnSend.setText("Enviar");
         BtnSend.addActionListener(new java.awt.event.ActionListener() {
@@ -84,6 +95,7 @@ public class InterfazCliente extends javax.swing.JFrame {
                 BtnSendActionPerformed(evt);
             }
         });
+        BK.add(BtnSend, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 490, -1, -1));
 
         BtnConnect.setText("Conectar");
         BtnConnect.addActionListener(new java.awt.event.ActionListener() {
@@ -91,10 +103,13 @@ public class InterfazCliente extends javax.swing.JFrame {
                 BtnConnectActionPerformed(evt);
             }
         });
+        BK.add(BtnConnect, new org.netbeans.lib.awtextra.AbsoluteConstraints(264, 71, -1, -1));
 
         TextValueSend.setColumns(20);
         TextValueSend.setRows(5);
         jScrollPane1.setViewportView(TextValueSend);
+
+        BK.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 360, 257, 116));
 
         TextMensajesRecibidos.setEditable(false);
         TextMensajesRecibidos.setColumns(20);
@@ -102,64 +117,17 @@ public class InterfazCliente extends javax.swing.JFrame {
         TextMensajesRecibidos.setFocusable(false);
         jScrollPane2.setViewportView(TextMensajesRecibidos);
 
+        BK.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(36, 185, 257, 111));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(36, 36, 36)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(BtnSend)
-                    .addComponent(jLabel4)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addGap(26, 26, 26)
-                                .addComponent(TextTCPIP, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addGap(26, 26, 26)
-                                .addComponent(TextPort, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(48, 48, 48)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(BtnConnect)
-                            .addComponent(BtnDisconnect)))
-                    .addComponent(jLabel3)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(27, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(ClientTitle)
-                .addGap(131, 131, 131))
+            .addComponent(BK, javax.swing.GroupLayout.DEFAULT_SIZE, 386, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addComponent(ClientTitle)
-                .addGap(27, 27, 27)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(TextTCPIP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(BtnConnect))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(TextPort, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(BtnDisconnect))
-                .addGap(18, 18, 18)
-                .addComponent(jLabel4)
-                .addGap(12, 12, 12)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel3)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(BtnSend)
-                .addContainerGap(32, Short.MAX_VALUE))
+            .addComponent(BK, javax.swing.GroupLayout.DEFAULT_SIZE, 577, Short.MAX_VALUE)
         );
 
         pack();
@@ -284,6 +252,7 @@ public class InterfazCliente extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel BK;
     private javax.swing.JButton BtnConnect;
     private javax.swing.JButton BtnDisconnect;
     private javax.swing.JButton BtnSend;

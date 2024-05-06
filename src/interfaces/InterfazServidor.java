@@ -34,6 +34,7 @@ public class InterfazServidor extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        BK = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         BtnEnviarACliente = new javax.swing.JButton();
         ServerTitle = new javax.swing.JLabel();
@@ -45,10 +46,16 @@ public class InterfazServidor extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         TextEnviarACliente = new javax.swing.JTextArea();
+        jLabel4 = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel2.setText("Datos Recibidos");
+        BK.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel2.setText("Datos Recibidos RS232");
+        BK.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, -1, -1));
 
         BtnEnviarACliente.setText("Enviar a Cliente");
         BtnEnviarACliente.addActionListener(new java.awt.event.ActionListener() {
@@ -56,17 +63,21 @@ public class InterfazServidor extends javax.swing.JFrame {
                 BtnEnviarAClienteActionPerformed(evt);
             }
         });
+        BK.add(BtnEnviarACliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 430, -1, -1));
 
         ServerTitle.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         ServerTitle.setText("Aplicación Servidor");
+        BK.add(ServerTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 10, -1, -1));
 
         jLabel1.setText("Puerto de Red");
+        BK.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, -1, 25));
 
         TextPuertoRed.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 TextPuertoRedActionPerformed(evt);
             }
         });
+        BK.add(TextPuertoRed, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 60, 110, 25));
 
         BtnActivateServer.setText("Activar servidor");
         BtnActivateServer.setFocusable(false);
@@ -75,6 +86,7 @@ public class InterfazServidor extends javax.swing.JFrame {
                 BtnActivateServerActionPerformed(evt);
             }
         });
+        BK.add(BtnActivateServer, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 60, -1, 25));
 
         TextDatosRecibidos.setEditable(false);
         TextDatosRecibidos.setColumns(20);
@@ -83,61 +95,82 @@ public class InterfazServidor extends javax.swing.JFrame {
         TextDatosRecibidos.setFocusable(false);
         jScrollPane1.setViewportView(TextDatosRecibidos);
 
+        BK.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, 300, -1));
+
         jLabel3.setText("Datos a enviar al cliente");
+        BK.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 300, -1, -1));
 
         TextEnviarACliente.setColumns(20);
         TextEnviarACliente.setRows(5);
         jScrollPane2.setViewportView(TextEnviarACliente);
+
+        BK.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 330, 300, -1));
+
+        jLabel4.setText("Aplicacion RS232");
+        BK.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, -1, 25));
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "COM0", "COM1", "COM2", "COM3", "COM4", "COM5", "COM6", "COM7", "COM8", "COM9" }));
+        BK.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 110, -1, 25));
+
+        jButton1.setText("Configurar");
+        BK.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 110, -1, 25));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(31, 31, 31)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(ServerTitle)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(TextPuertoRed, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(BtnActivateServer))))
-                    .addComponent(BtnEnviarACliente)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 271, Short.MAX_VALUE)))
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addComponent(BK, javax.swing.GroupLayout.PREFERRED_SIZE, 420, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 6, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addComponent(ServerTitle)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(TextPuertoRed, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(BtnActivateServer))
-                .addGap(24, 24, 24)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
-                .addComponent(jLabel3)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(BtnEnviarACliente)
-                .addGap(18, 18, 18))
+            .addComponent(BK, javax.swing.GroupLayout.DEFAULT_SIZE, 477, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    // Recuperar el valor del puerto de red y crear un hilo que maneje la conexión
+    private void BtnActivateServerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnActivateServerActionPerformed
+        String puertoUsuario = TextPuertoRed.getText();
+        int puertoRed = Integer.parseInt(puertoUsuario);
+
+        try {
+            // Crear e iniciar el hilo que maneja la conexión y recibe los datos
+            ManejarConexion hiloConexion = new ManejarConexion(puertoRed);
+            hiloConexion.start();
+        } catch (Exception e) {
+            // Manejar la excepción
+        }
+    }//GEN-LAST:event_BtnActivateServerActionPerformed
+
+    private void TextPuertoRedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TextPuertoRedActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TextPuertoRedActionPerformed
+
+    // Obtiene el texto, obtiene el flujo de salida del socket y manda
+    // el mensaje al cliente
+    // Para eso hay que comprobar si ya existe una conexión
+    // si no existe, muestra un error
+    private void BtnEnviarAClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEnviarAClienteActionPerformed
+        if (this.socket != null) {
+            String mensajeAEnviar = TextEnviarACliente.getText();
+
+            // Obtiene el flujo de salida
+            try {
+                DataOutputStream dataOutput = new DataOutputStream(socket.getOutputStream());
+                dataOutput.writeUTF(mensajeAEnviar);
+                // Limpiar el text area
+                TextEnviarACliente.setText("");
+            } catch (IOException e) {
+                System.out.println("Ha ocurrido una excepción de I/O");
+                System.out.println(e.getMessage());
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "No hay una conexión inciada con el cliente: ", "Error de conexión", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_BtnEnviarAClienteActionPerformed
 
     // Clase que permite manejar la conexión en un hilo separado al principal
     private class ManejarConexion extends Thread {
@@ -186,47 +219,6 @@ public class InterfazServidor extends javax.swing.JFrame {
         }
     }
 
-    // Recuperar el valor del puerto de red y crear un hilo que maneje la conexión
-    private void BtnActivateServerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnActivateServerActionPerformed
-        String puertoUsuario = TextPuertoRed.getText();
-        int puertoRed = Integer.parseInt(puertoUsuario);
-
-        try {
-            // Crear e iniciar el hilo que maneja la conexión y recibe los datos
-            ManejarConexion hiloConexion = new ManejarConexion(puertoRed);
-            hiloConexion.start();
-        } catch (Exception e) {
-            // Manejar la excepción
-        }
-    }//GEN-LAST:event_BtnActivateServerActionPerformed
-
-    private void TextPuertoRedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TextPuertoRedActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_TextPuertoRedActionPerformed
-
-    // Obtiene el texto, obtiene el flujo de salida del socket y manda
-    // el mensaje al cliente
-    // Para eso hay que comprobar si ya existe una conexión
-    // si no existe, muestra un error
-    private void BtnEnviarAClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEnviarAClienteActionPerformed
-        if (this.socket != null) {
-            String mensajeAEnviar = TextEnviarACliente.getText();
-
-            // Obtiene el flujo de salida
-            try {
-                DataOutputStream dataOutput = new DataOutputStream(socket.getOutputStream());
-                dataOutput.writeUTF(mensajeAEnviar);
-                // Limpiar el text area
-                TextEnviarACliente.setText("");
-            } catch (IOException e) {
-                System.out.println("Ha ocurrido una excepción de I/O");
-                System.out.println(e.getMessage());
-            }
-        } else {
-            JOptionPane.showMessageDialog(null, "No hay una conexión inciada con el cliente: ", "Error de conexión", JOptionPane.ERROR_MESSAGE);
-        }
-    }//GEN-LAST:event_BtnEnviarAClienteActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -263,15 +255,19 @@ public class InterfazServidor extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel BK;
     private javax.swing.JButton BtnActivateServer;
     private javax.swing.JButton BtnEnviarACliente;
     private javax.swing.JLabel ServerTitle;
     private javax.swing.JTextArea TextDatosRecibidos;
     private javax.swing.JTextArea TextEnviarACliente;
     private javax.swing.JTextField TextPuertoRed;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     // End of variables declaration//GEN-END:variables

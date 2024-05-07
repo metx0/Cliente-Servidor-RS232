@@ -11,12 +11,16 @@ import java.net.Socket;
 import javax.swing.JOptionPane;
 
 /**
- *
+ * 
  * @author Fabrizio
+ * @author Miguel
+ * @author Eduardo
  */
 public class InterfazCliente extends javax.swing.JFrame {
 
+    // Socket que maneja la conexión
     private Socket socket;
+    // Flujos de entrada y salida
     private DataInputStream dataInput;
     private DataOutputStream dataOutput;
 
@@ -42,7 +46,7 @@ public class InterfazCliente extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         ClientTitle = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        TextTCPIP = new javax.swing.JTextField();
+        TextIP = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         TextPort = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
@@ -57,37 +61,27 @@ public class InterfazCliente extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        BK.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
         BtnDisconnect.setText("Desconectar");
         BtnDisconnect.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnDisconnectActionPerformed(evt);
             }
         });
-        BK.add(BtnDisconnect, new org.netbeans.lib.awtextra.AbsoluteConstraints(264, 112, -1, -1));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel4.setText("Datos recibidos");
-        BK.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(36, 153, -1, -1));
 
         ClientTitle.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         ClientTitle.setText("Aplicación Cliente");
-        BK.add(ClientTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(135, 24, -1, -1));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel1.setText("TCP/IP");
-        BK.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(36, 71, -1, -1));
-        BK.add(TextTCPIP, new org.netbeans.lib.awtextra.AbsoluteConstraints(103, 71, 113, -1));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel2.setText("Puerto");
-        BK.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(36, 112, -1, -1));
-        BK.add(TextPort, new org.netbeans.lib.awtextra.AbsoluteConstraints(103, 112, 113, -1));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel3.setText("Datos a enviar al servidor");
-        BK.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(36, 314, -1, -1));
 
         BtnSend.setText("Enviar");
         BtnSend.addActionListener(new java.awt.event.ActionListener() {
@@ -95,7 +89,6 @@ public class InterfazCliente extends javax.swing.JFrame {
                 BtnSendActionPerformed(evt);
             }
         });
-        BK.add(BtnSend, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 490, -1, -1));
 
         BtnConnect.setText("Conectar");
         BtnConnect.addActionListener(new java.awt.event.ActionListener() {
@@ -103,13 +96,10 @@ public class InterfazCliente extends javax.swing.JFrame {
                 BtnConnectActionPerformed(evt);
             }
         });
-        BK.add(BtnConnect, new org.netbeans.lib.awtextra.AbsoluteConstraints(264, 71, -1, -1));
 
         TextValueSend.setColumns(20);
         TextValueSend.setRows(5);
         jScrollPane1.setViewportView(TextValueSend);
-
-        BK.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 360, 257, 116));
 
         TextMensajesRecibidos.setEditable(false);
         TextMensajesRecibidos.setColumns(20);
@@ -117,25 +107,97 @@ public class InterfazCliente extends javax.swing.JFrame {
         TextMensajesRecibidos.setFocusable(false);
         jScrollPane2.setViewportView(TextMensajesRecibidos);
 
-        BK.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(36, 185, 257, 111));
+        javax.swing.GroupLayout BKLayout = new javax.swing.GroupLayout(BK);
+        BK.setLayout(BKLayout);
+        BKLayout.setHorizontalGroup(
+            BKLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(BKLayout.createSequentialGroup()
+                .addGroup(BKLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(BKLayout.createSequentialGroup()
+                        .addGap(135, 135, 135)
+                        .addComponent(ClientTitle))
+                    .addGroup(BKLayout.createSequentialGroup()
+                        .addGap(36, 36, 36)
+                        .addComponent(jLabel2)
+                        .addGap(26, 26, 26)
+                        .addComponent(TextPort, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(40, 40, 40)
+                        .addComponent(BtnDisconnect))
+                    .addGroup(BKLayout.createSequentialGroup()
+                        .addGap(36, 36, 36)
+                        .addComponent(jLabel4))
+                    .addGroup(BKLayout.createSequentialGroup()
+                        .addGap(36, 36, 36)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(BKLayout.createSequentialGroup()
+                        .addGap(36, 36, 36)
+                        .addGroup(BKLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3)
+                            .addComponent(BtnSend))))
+                .addGap(19, 19, Short.MAX_VALUE))
+            .addGroup(BKLayout.createSequentialGroup()
+                .addGap(36, 36, 36)
+                .addComponent(jLabel1)
+                .addGap(26, 26, 26)
+                .addComponent(TextIP, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(BtnConnect)
+                .addGap(36, 36, 36))
+        );
+        BKLayout.setVerticalGroup(
+            BKLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(BKLayout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addComponent(ClientTitle)
+                .addGap(27, 27, 27)
+                .addGroup(BKLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addGroup(BKLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(TextIP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(BtnConnect)))
+                .addGap(18, 18, 18)
+                .addGroup(BKLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2)
+                    .addComponent(TextPort, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(BtnDisconnect))
+                .addGap(18, 18, 18)
+                .addComponent(jLabel4)
+                .addGap(12, 12, 12)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel3)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(BtnSend)
+                .addContainerGap())
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(BK, javax.swing.GroupLayout.DEFAULT_SIZE, 386, Short.MAX_VALUE)
+            .addComponent(BK, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(BK, javax.swing.GroupLayout.DEFAULT_SIZE, 577, Short.MAX_VALUE)
+            .addComponent(BK, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    // Cerrar la ventana y volverla a abrir
+    private void reiniciarVentana() {
+        dispose();
+        InterfazCliente nuevaVentana = new InterfazCliente();
+        nuevaVentana.setVisible(true);
+    }
+    
     // Hilo que permite recibir los mensajes del servidor
+    // La clase no tiene atributos propios porque usa las variables de la clase
     private class ConexionServidor extends Thread {
-        // No tiene atributos porque usa las variables de la clase
         
         public ConexionServidor () {}
         
@@ -157,10 +219,7 @@ public class InterfazCliente extends javax.swing.JFrame {
                 dataInput.close();
                 JOptionPane.showInternalMessageDialog(null, "Cliente desconectado", "Cliente desconectado", JOptionPane.INFORMATION_MESSAGE);
                
-                // Cerrar la ventana y volverla a abrir
-                dispose();
-                InterfazCliente nuevaVentana = new InterfazCliente();
-                nuevaVentana.setVisible(true);
+                reiniciarVentana();
             } catch (IOException e) {
                 System.out.println(e.getMessage());
             }            
@@ -175,6 +234,7 @@ public class InterfazCliente extends javax.swing.JFrame {
                 dataInput.close();
                 dataOutput.close();
                 JOptionPane.showMessageDialog(null, "Desconexión establecida", "Desconexión exitosa", JOptionPane.INFORMATION_MESSAGE);
+                reiniciarVentana();
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error al desconectar: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
@@ -187,6 +247,13 @@ public class InterfazCliente extends javax.swing.JFrame {
             if (socket != null && socket.isConnected()) {
                 String mensaje = TextValueSend.getText();
                 dataOutput.writeUTF(mensaje);
+                
+                if (mensaje.equalsIgnoreCase("exit")) {
+                    reiniciarVentana();
+                    return;
+                }
+                
+                // Limpiar el text area
                 TextValueSend.setText("");
             } else {
                 JOptionPane.showMessageDialog(null, "No hay una conexión establecida", "Error", JOptionPane.ERROR_MESSAGE);
@@ -198,13 +265,14 @@ public class InterfazCliente extends javax.swing.JFrame {
 
     private void BtnConnectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnConnectActionPerformed
         try {
-            String ip = TextTCPIP.getText();        //Optenemos la Ip 
-            int puerto = Integer.parseInt(TextPort.getText());      //Optenemos el puerto
+            String ip = TextIP.getText(); // Obtenemos la Ip 
+            int puerto = Integer.parseInt(TextPort.getText()); // Obtenemos el puerto
             
-            //creamoos un socket con la ip y puerto
+            // Creamos un socket con la IP y el puerto
             socket = new Socket(ip, puerto);
-            dataInput = new DataInputStream(socket.getInputStream());       //entrada de datos
-            dataOutput = new DataOutputStream(socket.getOutputStream());    //salida de datos
+            // Inicializar los flujos de entrada y salida de datos
+            dataInput = new DataInputStream(socket.getInputStream());       
+            dataOutput = new DataOutputStream(socket.getOutputStream());    
 
             JOptionPane.showMessageDialog(null, "Conexión establecida con el servidor", "Conexión exitosa", JOptionPane.INFORMATION_MESSAGE);
             
@@ -257,9 +325,9 @@ public class InterfazCliente extends javax.swing.JFrame {
     private javax.swing.JButton BtnDisconnect;
     private javax.swing.JButton BtnSend;
     private javax.swing.JLabel ClientTitle;
+    private javax.swing.JTextField TextIP;
     private javax.swing.JTextArea TextMensajesRecibidos;
     private javax.swing.JTextField TextPort;
-    private javax.swing.JTextField TextTCPIP;
     private javax.swing.JTextArea TextValueSend;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

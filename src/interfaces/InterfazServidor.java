@@ -7,6 +7,10 @@ package interfaces;
 import java.net.*;
 import java.io.*;
 import javax.swing.JOptionPane;
+// Para la comunicación serial
+import giovynet.serial.Baud;
+import giovynet.serial.Com;
+import giovynet.serial.Parameters;
 
 /**
  *
@@ -18,6 +22,8 @@ public class InterfazServidor extends javax.swing.JFrame {
 
     // El socket se inicializa cuando el cliente acepta la conexión
     private Socket socket;
+    private Com puertoCom;
+    private Parameters parametrosCom;
 
     /**
      * Creates new form InterfazServidor
@@ -216,7 +222,7 @@ public class InterfazServidor extends javax.swing.JFrame {
         InterfazServidor nuevaVentana = new InterfazServidor();
         nuevaVentana.setVisible(true);
     }
-    
+
     // Clase que permite manejar la conexión en un hilo separado al principal
     private class ManejarConexion extends Thread {
 
@@ -242,6 +248,7 @@ public class InterfazServidor extends javax.swing.JFrame {
                 // Obtenemos el flujo de entrada de datos del cliente
                 dataInput = new DataInputStream(socket.getInputStream());
 
+                // TODO: mandar el mensaje por medio de RS232
                 while (!mensajeRecibido.equalsIgnoreCase("exit")) {
                     mensajeRecibido = dataInput.readUTF();
                     TextDatosRecibidosCliente.setText(TextDatosRecibidosCliente.getText() + mensajeRecibido + "\n");
@@ -257,6 +264,40 @@ public class InterfazServidor extends javax.swing.JFrame {
                 reiniciarVentana();
             } catch (Exception e) {
                 // Manejar la excepción
+            }
+        }
+    }
+
+    // Clase que maneja la conexión por el puerto RS232 en un hilo
+    private class ConexionSerial extends Thread {
+
+        @Override
+        public void run() {
+            String mensaje = "";
+
+            // Recibir los mensajes, mostrarlos en la intefaz y mandarlos al cliente
+            while (true) {
+                try {
+                    String cadenaRecibida = puertoCom.receiveSingleString();
+
+                    // Si se recibe una cadena vacía, no se hace nada
+                    if (!cadenaRecibida.equals("")) {
+                        mensaje += cadenaRecibida;
+                        TextDatosRecibidosRS232.setText(cadenaRecibida);
+
+                        // Mandarlo al cliente
+                        if (socket == null) {
+                            JOptionPane.showMessageDialog(null, "No hay una conexión inciada con el cliente: ", "Error de conexión", JOptionPane.ERROR_MESSAGE);
+                            JOptionPane.showMessageDialog(null, "Inicie de nuevo la configuración: ", "Error de conexión", JOptionPane.ERROR_MESSAGE);
+                            break;
+                        } else {
+                            DataOutputStream dataOutput = new DataOutputStream(socket.getOutputStream());
+                            dataOutput.writeUTF(cadenaRecibida);
+                        }
+                    }
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                }
             }
         }
     }
@@ -293,12 +334,12 @@ public class InterfazServidor extends javax.swing.JFrame {
         try {
             DataOutputStream dataOutput = new DataOutputStream(socket.getOutputStream());
             dataOutput.writeUTF(mensajeAEnviar);
-            
+
             if (mensajeAEnviar.equalsIgnoreCase("exit")) {
                 reiniciarVentana();
                 return;
             }
-            
+
             // Limpiar el text area
             TextEnviarACliente.setText("");
         } catch (IOException e) {
@@ -309,14 +350,32 @@ public class InterfazServidor extends javax.swing.JFrame {
     }//GEN-LAST:event_BtnEnviarAClienteActionPerformed
 
     private void ComboBoxCOMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboBoxCOMActionPerformed
-        
+
     }//GEN-LAST:event_ComboBoxCOMActionPerformed
 
-    // Código de Giovynet y eso
+    // Toda la lógica para iniciar la comunicación por medio de RS232
     private void BtnConfigurarCOMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnConfigurarCOMActionPerformed
-        // Como prueba, imprime el valor seleccionado del combo box
-        String com = ComboBoxCOM.getSelectedItem().toString();
-        System.out.println(com);
+        // Obtener el valor seleccionado del combo box
+        String puertoSeleccionado = ComboBoxCOM.getSelectedItem().toString();
+
+        try {
+            parametrosCom = new Parameters();
+            parametrosCom.setPort(puertoSeleccionado);
+            parametrosCom.setBaudRate(Baud._9600);
+            parametrosCom.setMinDelayWrite(10);
+
+            // Inicializamos puertoCom con los parámetros
+            puertoCom = new Com(parametrosCom);
+
+            JOptionPane.showMessageDialog(null, "Puerto en línea", "Puerto en línea", JOptionPane.INFORMATION_MESSAGE);
+            System.out.println("Puerto en línea");
+
+            // Iniciar el hilo para escuchar los mensajes del puerto serial
+            ConexionSerial rx = new ConexionSerial();
+            rx.start();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }//GEN-LAST:event_BtnConfigurarCOMActionPerformed
 
     /**

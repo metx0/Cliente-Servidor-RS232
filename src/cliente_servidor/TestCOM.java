@@ -47,7 +47,7 @@ public class TestCOM {
         Parameters param = new Parameters();
         
         // Definición del puerto 1
-        param.setPort("COM1");
+        param.setPort("COM2");
         
         // Definición de la velocidad de impresión. Se debe tener en cuenta
         // dicho argumento en la especificación de velocidad del dispositivo

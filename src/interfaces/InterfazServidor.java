@@ -11,6 +11,8 @@ import javax.swing.JOptionPane;
 import giovynet.serial.Baud;
 import giovynet.serial.Com;
 import giovynet.serial.Parameters;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -59,6 +61,7 @@ public class InterfazServidor extends javax.swing.JFrame {
         jScrollPane3 = new javax.swing.JScrollPane();
         TextDatosRecibidosCliente = new javax.swing.JTextArea();
         jLabel5 = new javax.swing.JLabel();
+        BtnEnviarCOM = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -128,6 +131,13 @@ public class InterfazServidor extends javax.swing.JFrame {
 
         jLabel5.setText("Datos recibidos del cliente");
 
+        BtnEnviarCOM.setText("Enviar a COM");
+        BtnEnviarCOM.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnEnviarCOMActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout BKLayout = new javax.swing.GroupLayout(BK);
         BK.setLayout(BKLayout);
         BKLayout.setHorizontalGroup(
@@ -161,7 +171,10 @@ public class InterfazServidor extends javax.swing.JFrame {
                     .addGroup(BKLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jLabel3)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(BtnEnviarACliente)
+                        .addGroup(BKLayout.createSequentialGroup()
+                            .addComponent(BtnEnviarACliente)
+                            .addGap(38, 38, 38)
+                            .addComponent(BtnEnviarCOM, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addComponent(jLabel5)
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE))))
         );
@@ -193,7 +206,9 @@ public class InterfazServidor extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(BtnEnviarACliente)
+                .addGroup(BKLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(BtnEnviarACliente)
+                    .addComponent(BtnEnviarCOM))
                 .addGap(19, 19, 19))
         );
 
@@ -350,7 +365,7 @@ public class InterfazServidor extends javax.swing.JFrame {
     }//GEN-LAST:event_BtnEnviarAClienteActionPerformed
 
     private void ComboBoxCOMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboBoxCOMActionPerformed
-
+        
     }//GEN-LAST:event_ComboBoxCOMActionPerformed
 
     // Toda la lógica para iniciar la comunicación por medio de RS232
@@ -377,6 +392,19 @@ public class InterfazServidor extends javax.swing.JFrame {
             System.out.println(e.getMessage());
         }
     }//GEN-LAST:event_BtnConfigurarCOMActionPerformed
+
+    private void BtnEnviarCOMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEnviarCOMActionPerformed
+        // TODO add your handling code here:
+        String mensaje = TextDatosRecibidosCliente.getText();
+        
+        try {
+            puertoCom.sendSingleData(mensaje);
+        } catch (Exception ex) {
+            Logger.getLogger(InterfazServidor.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        TextDatosRecibidosCliente.setText("");
+    }//GEN-LAST:event_BtnEnviarCOMActionPerformed
 
     /**
      * @param args the command line arguments
@@ -418,6 +446,7 @@ public class InterfazServidor extends javax.swing.JFrame {
     private javax.swing.JButton BtnActivateServer;
     private javax.swing.JButton BtnConfigurarCOM;
     private javax.swing.JButton BtnEnviarACliente;
+    private javax.swing.JButton BtnEnviarCOM;
     private javax.swing.JComboBox<String> ComboBoxCOM;
     private javax.swing.JLabel ServerTitle;
     private javax.swing.JTextArea TextDatosRecibidosCliente;
